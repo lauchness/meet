@@ -43,8 +43,13 @@ module.exports.getAccessToken = async (event) => {
     client_secret,
     redirect_uris[0]
   );
+  // Decode authorization code extracted from the URL query
   const code = decodeURIComponent(`${event.pathParameters.code}`);
   return new Promise((resolve, reject) => {
+    /**
+     *  Exchange authorization code for access token with a “callback” after the exchange,
+     *  The callback in this case is an arrow function with the results as parameters: “err” and “token.”
+     */
     oAuth2Client.getToken(code, (err, token) => {
       if (err) {
         return reject(err);
@@ -53,6 +58,7 @@ module.exports.getAccessToken = async (event) => {
     });
   })
     .then((token) => {
+      //respond with OAuth token
       return {
         statusCode: 200,
         headers: {
