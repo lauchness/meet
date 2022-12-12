@@ -87,6 +87,7 @@ module.exports.getCalendarEvents = (event) => {
     `${event.pathParameters.access_token}`
   );
   oAuth2Client.setCredentials({ access_token });
+
   return new Promise((resolve, reject) => {
     calendar.events.list(
       {
