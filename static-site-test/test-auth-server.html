@@ -45,12 +45,12 @@
       </main>
       <script type="text/javascript">
         // ---------------step 1
-        const getCodeElement = document.getElementById("getCode");
+        const getCodeElement = document.getElementById("getURL");
         const resultElement = document.getElementById("result");
         const resultLink = document.getElementById("authURL");
         const getAuthURL =
           "https://brh7z8gvmc.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url";
-        getCodeElement.onclick = function () {
+        getURLElement.onclick = function () {
           fetch(getAuthURL)
             .then(function (response) {
               return response.json();
