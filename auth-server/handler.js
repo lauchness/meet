@@ -136,6 +136,3 @@ module.exports.getCalendarEvents = async (event) => {
       };
     });
 };
-
-// so it is MOST LIKELY the fact that the bearer header is not being sent with the access token in the getcalendarevents request.
-// figure that out and you might be good
