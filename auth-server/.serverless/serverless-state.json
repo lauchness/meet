@@ -10,8 +10,8 @@
       "region": "us-east-1",
       "timeout": 60,
       "environment": {
-        "CLIENT_ID": "453860335842-vj7os1g7alttuj408r83e12b06d06q92.apps.googleusercontent.com",
-        "CLIENT_SECRET": "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",
+        "CLIENT_ID": "453860335842-62e622anmsv8rbfm0n5dmfobdtae89l7.apps.googleusercontent.com",
+        "CLIENT_SECRET": "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",
         "PROJECT_ID": "meet-app-370718",
         "CALENDAR_ID": "fullstackwebdev@careerfoundry.com"
       },
@@ -117,27 +117,16 @@
                   {
                     "Effect": "Allow",
                     "Principal": {
-                      "Service": [
-                        "lambda.amazonaws.com"
-                      ]
+                      "Service": ["lambda.amazonaws.com"]
                     },
-                    "Action": [
-                      "sts:AssumeRole"
-                    ]
+                    "Action": ["sts:AssumeRole"]
                   }
                 ]
               },
               "Policies": [
                 {
                   "PolicyName": {
-                    "Fn::Join": [
-                      "-",
-                      [
-                        "auth-server",
-                        "dev",
-                        "lambda"
-                      ]
-                    ]
+                    "Fn::Join": ["-", ["auth-server", "dev", "lambda"]]
                   },
                   "PolicyDocument": {
                     "Version": "2012-10-17",
@@ -156,9 +145,7 @@
                       },
                       {
                         "Effect": "Allow",
-                        "Action": [
-                          "logs:PutLogEvents"
-                        ],
+                        "Action": ["logs:PutLogEvents"],
                         "Resource": [
                           {
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/auth-server-dev*:*:*"
@@ -208,15 +195,10 @@
                 }
               },
               "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["IamRoleLambdaExecution", "Arn"]
               }
             },
-            "DependsOn": [
-              "GetAuthURLLogGroup"
-            ]
+            "DependsOn": ["GetAuthURLLogGroup"]
           },
           "GetAccessTokenLambdaFunction": {
             "Type": "AWS::Lambda::Function",
@@ -241,15 +223,10 @@
                 }
               },
               "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["IamRoleLambdaExecution", "Arn"]
               }
             },
-            "DependsOn": [
-              "GetAccessTokenLogGroup"
-            ]
+            "DependsOn": ["GetAccessTokenLogGroup"]
           },
           "GetCalendarEventsLambdaFunction": {
             "Type": "AWS::Lambda::Function",
@@ -274,15 +251,10 @@
                 }
               },
               "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["IamRoleLambdaExecution", "Arn"]
               }
             },
-            "DependsOn": [
-              "GetCalendarEventsLogGroup"
-            ]
+            "DependsOn": ["GetCalendarEventsLogGroup"]
           },
           "GetAuthURLLambdaVersioni7UTV8qyx6b8jZMYQq1iZARDC8qBBoGOtCnvXU": {
             "Type": "AWS::Lambda::Version",
@@ -319,9 +291,7 @@
             "Properties": {
               "Name": "dev-auth-server",
               "EndpointConfiguration": {
-                "Types": [
-                  "EDGE"
-                ]
+                "Types": ["EDGE"]
               },
               "Policy": ""
             }
@@ -330,10 +300,7 @@
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
+                "Fn::GetAtt": ["ApiGatewayRestApi", "RootResourceId"]
               },
               "PathPart": "api",
               "RestApiId": {
@@ -431,10 +398,7 @@
                       },
                       ":lambda:path/2015-03-31/functions/",
                       {
-                        "Fn::GetAtt": [
-                          "GetAuthURLLambdaFunction",
-                          "Arn"
-                        ]
+                        "Fn::GetAtt": ["GetAuthURLLambdaFunction", "Arn"]
                       },
                       "/invocations"
                     ]
@@ -443,9 +407,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetAuthURLLambdaPermissionApiGateway"
-            ]
+            "DependsOn": ["GetAuthURLLambdaPermissionApiGateway"]
           },
           "ApiGatewayMethodApiTokenCodeVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -477,10 +439,7 @@
                       },
                       ":lambda:path/2015-03-31/functions/",
                       {
-                        "Fn::GetAtt": [
-                          "GetAccessTokenLambdaFunction",
-                          "Arn"
-                        ]
+                        "Fn::GetAtt": ["GetAccessTokenLambdaFunction", "Arn"]
                       },
                       "/invocations"
                     ]
@@ -489,9 +448,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetAccessTokenLambdaPermissionApiGateway"
-            ]
+            "DependsOn": ["GetAccessTokenLambdaPermissionApiGateway"]
           },
           "ApiGatewayMethodApiGetDasheventsAccesstokenVarGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -523,10 +480,7 @@
                       },
                       ":lambda:path/2015-03-31/functions/",
                       {
-                        "Fn::GetAtt": [
-                          "GetCalendarEventsLambdaFunction",
-                          "Arn"
-                        ]
+                        "Fn::GetAtt": ["GetCalendarEventsLambdaFunction", "Arn"]
                       },
                       "/invocations"
                     ]
@@ -535,9 +489,7 @@
               },
               "MethodResponses": []
             },
-            "DependsOn": [
-              "GetCalendarEventsLambdaPermissionApiGateway"
-            ]
+            "DependsOn": ["GetCalendarEventsLambdaPermissionApiGateway"]
           },
           "ApiGatewayDeployment1671388551226": {
             "Type": "AWS::ApiGateway::Deployment",
@@ -557,10 +509,7 @@
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetAuthURLLambdaFunction",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["GetAuthURLLambdaFunction", "Arn"]
               },
               "Action": "lambda:InvokeFunction",
               "Principal": "apigateway.amazonaws.com",
@@ -594,10 +543,7 @@
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetAccessTokenLambdaFunction",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["GetAccessTokenLambdaFunction", "Arn"]
               },
               "Action": "lambda:InvokeFunction",
               "Principal": "apigateway.amazonaws.com",
@@ -631,10 +577,7 @@
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetCalendarEventsLambdaFunction",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["GetCalendarEventsLambdaFunction", "Arn"]
               },
               "Action": "lambda:InvokeFunction",
               "Principal": "apigateway.amazonaws.com",
