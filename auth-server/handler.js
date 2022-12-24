@@ -121,6 +121,7 @@ module.exports.getCalendarEvents = async (event) => {
       return {
         statusCode: 200,
         headers: {
+          Authorization: "Bearer" + { token },
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({ events: results.data.items }),
