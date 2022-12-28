@@ -21,8 +21,8 @@
       <main id="container">
         <h1>OAuth2 Test</h1>
         <h4><b>Step 1:</b> Get OAuth URL</h4>
-        <p>Click the button below to get your auth url.</p>
-        <button id="getCode">Get OAuth URL</button>
+        <p>Click the button below to get your auth URL.</p>
+        <button id="getURL">Get OAuth URL</button>
         <p id="result"></p>
         <a id="authURL" href target="_blank">Click to authorize</a>
         <!-- STEP 2 -- make sure step 1 works before moving on-->
@@ -45,12 +45,13 @@
       </main>
       <script type="text/javascript">
         // ---------------step 1
-        const getCodeElement = document.getElementById("getCode");
+        const getURLElement = document.getElementById("getURL");
         const resultElement = document.getElementById("result");
         const resultLink = document.getElementById("authURL");
         const getAuthURL =
           "https://rs80bt6xd1.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url";
-        getCodeElement.onclick = function () {
+
+        getURLElement.onclick = function () {
           fetch(getAuthURL)
             .then(function (response) {
               return response.json();
@@ -89,7 +90,7 @@
             });
         };
         // --------------------- END OF STEP 2
-        // -------------- STEP 3
+        // -- STEP 3
         const getEvents = document.getElementById("getEvents");
         const events = document.getElementById("events");
         const getCalendarEvents =
