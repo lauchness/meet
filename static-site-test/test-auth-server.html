@@ -50,6 +50,7 @@
         const resultLink = document.getElementById("authURL");
         const getAuthURL =
           "https://rs80bt6xd1.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url";
+
         getURLElement.onclick = function () {
           fetch(getAuthURL)
             .then(function (response) {
