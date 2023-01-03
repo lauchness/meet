@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import NumberOfEvents from "../NumberOfEvents";
 
 describe("<Event /> component", () => {
-  let NumberWrapper, noeInput, numQuery;
+  let NumberWrapper, noeInput;
 
   beforeAll(() => {
     NumberWrapper = shallow(<NumberOfEvents />);
