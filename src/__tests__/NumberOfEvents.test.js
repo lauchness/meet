@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import NumberOfEvents from "../NumberOfEvents";
-import { mockData } from "../mock-data";
 
 describe("<Event /> component", () => {
   let NumberWrapper, noeInput, numQuery;
@@ -9,7 +8,6 @@ describe("<Event /> component", () => {
   beforeAll(() => {
     NumberWrapper = shallow(<NumberOfEvents />);
     noeInput = NumberWrapper.find(".noe-Input input");
-    // numQuery = NumberWrapper.state("numQuery");
   });
 
   test("renders NumberOfEvents and noe-Input", () => {

@@ -15,7 +15,6 @@ describe("<Event /> component", () => {
     expect(EventWrapper.find(".summary h1")).toHaveLength[1];
   });
   test("renders start time correctly", () => {
-    const start = EventWrapper.find("start");
     expect(EventWrapper.find(".start p")).toHaveLength[1];
   });
   test("details are hidden before details button is pushed", () => {
