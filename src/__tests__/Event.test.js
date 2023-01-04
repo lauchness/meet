@@ -18,14 +18,14 @@ describe("<Event /> component", () => {
     expect(EventWrapper.find(".start p")).toHaveLength[1];
   });
   test("details are hidden before details button is pushed", () => {
-    const detailsButton = EventWrapper.find("detailsButton");
+    const detailsButton = EventWrapper.find("details-btn");
     expect(EventWrapper.state("collapsed")).toBe(true);
     expect(detailsButton).toBeDefined();
     expect(EventWrapper.find(".summary h1")).toHaveLength[0];
     expect(EventWrapper.find(".start p")).toHaveLength[0];
   });
   test("details are expanded when button is pushed", () => {
-    EventWrapper.find(".detailsButton").simulate("click");
+    EventWrapper.find(".details-btn").simulate("click");
     expect(EventWrapper.state("collapsed")).toBe(false);
     expect(EventWrapper.find(".summary h1")).toHaveLength[1];
     expect(EventWrapper.find(".start p")).toHaveLength[1];
