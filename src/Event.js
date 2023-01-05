@@ -11,24 +11,24 @@ class Event extends Component {
   render() {
     const { event } = this.props;
     const { collapsed } = this.state;
+
     return (
-      <div className="Event">
-        <h1 className="summary">{event.summary}</h1>
-        <p className="start">{event.start.dateTime}</p>
-        {!collapsed && (
-          <div className="details">
-            <p className="description">{event.description}</p>
-          </div>
-        )}
+      <div className="event">
+        <p className="summary">{event.summary}</p>
+        <p className="start">{new Date(event.start.dateTime).toString()}</p>
+        <p className="location">{event.location}</p>
         <button className="details-btn" onClick={this.toggleDetails}>
           {collapsed ? "show" : "hide"} Details
         </button>
+        {!collapsed && (
+          <div>
+            {/* <h1 className="summary">{event.summary}</h1>
+            <p className="start">{event.start.dateTime}</p> */}
+            <p className="description">{event.description}</p>
+          </div>
+        )}
       </div>
     );
   }
 }
 export default Event;
-
-// for whatever reason, i cant display "summary" unless it is INSIDE the fucking collapse.
-// CSS file provided is all fucked up.
-// "detailsButton" is there but doesnt do anything good.
