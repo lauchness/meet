@@ -2,10 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import reportWebVitals from "./reportWebVitals";
 
-const root = document.getElementById("root");
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import "./index.css";
+// import App from "./App";
+// import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+// import reportWebVitals from "./reportWebVitals";
+
+// const root = document.getElementById("root");
 // render(<App />, root);
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // ReactDOM.render(
