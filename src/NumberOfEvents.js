@@ -5,13 +5,13 @@ class NumberOfEvents extends Component {
     numQuery: 5,
   };
 
-  componentDidMount() {
-    this.setState({ numQuery: this.props.numQuery || 5 });
-  }
-
   noeInput = (value) => {
     this.setState({ numQuery: value });
   };
+
+  componentDidMount() {
+    this.setState({ numQuery: this.props.numQuery || 5 });
+  }
 
   render() {
     const { numQuery } = this.state;
