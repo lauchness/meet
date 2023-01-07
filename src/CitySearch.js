@@ -4,7 +4,7 @@ class CitySearch extends Component {
   state = {
     query: "",
     suggestions: [],
-    showSuggestions: false,
+    showSuggestions: undefined,
   };
   handleInputChanged = (event) => {
     const value = event.target.value;
