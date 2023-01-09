@@ -2,16 +2,17 @@ import React, { Component } from "react";
 
 class NumberOfEvents extends Component {
   state = {
-    numQuery: 5,
+    numQuery: 6,
   };
 
-  noeInput = (value) => {
-    this.props.noeInput(value);
+  noeInput = (e) => {
+    const value = e.target.value;
+    this.props.updateEvents(null, value);
     this.setState({ numQuery: value });
   };
 
   componentDidMount() {
-    this.setState({ numQuery: this.props.numQuery || 5 });
+    this.setState({ numQuery: this.props.numQuery || 6 });
   }
 
   render() {
