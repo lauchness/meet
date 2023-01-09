@@ -28,16 +28,33 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateEvents = (location) => {
-    getEvents().then((events) => {
-      const locationEvents =
-        location === "all"
-          ? events
-          : events.filter((event) => event.location === location);
-      this.setState({
-        events: locationEvents,
+  updateEvents = (location, inputNumber) => {
+    const { numQuery, selectedLocation } = this.state;
+    if (location) {
+      getEvents().then((events) => {
+        const locationEvents =
+          location === "all"
+            ? events
+            : events.filter((event) => event.location === location);
+        const currentNum = locationEvents.slice(0, numQuery);
+        this.setState({
+          events: currentNum,
+          selectedLocation: location,
+        });
       });
-    });
+    } else {
+      getEvents().then((events) => {
+        const locationEvents =
+          location === "all"
+            ? events
+            : events.filter((event) => event.location === selectedLocation);
+        const currentNum = locationEvents.slice(0, numQuery);
+        this.setState({
+          events: currentNum,
+          numQuery: inputNumber,
+        });
+      });
+    }
   };
 
   updateNumQuery(number) {
