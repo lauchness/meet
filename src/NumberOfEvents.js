@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class NumberOfEvents extends Component {
   state = {
-    numQuery: 5,
+    numQuery: 7,
   };
 
   noeInput = (e) => {
@@ -11,9 +11,9 @@ class NumberOfEvents extends Component {
     this.setState({ numQuery: inputValue });
   };
 
-  componentDidMount() {
-    this.setState({ numQuery: this.props.numQuery || 5 });
-  }
+  // componentDidMount() {
+  //   this.setState({ numQuery: this.props.numQuery || 5 });
+  // }
 
   render() {
     const { numQuery } = this.state;

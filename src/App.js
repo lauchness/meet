@@ -11,7 +11,7 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numQuery: 5,
+    numQuery: 7,
   };
 
   componentDidMount() {
