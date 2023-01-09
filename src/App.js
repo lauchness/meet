@@ -5,16 +5,15 @@ import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import "./nprogress.css";
 import { extractLocations, getEvents } from "./api";
-import { getAllByAltText } from "@testing-library/react";
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
-    numQuery: 7,
+    numQuery: 5,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
