@@ -25,7 +25,7 @@ class NumberOfEvents extends Component {
           className="noe-Input"
           value={numQuery}
           onChange={(event) => {
-            this.noeInput(event);
+            this.noeInput(event.target.value);
           }}
         />
       </div>
