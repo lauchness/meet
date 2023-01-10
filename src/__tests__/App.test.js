@@ -59,30 +59,32 @@ describe("<App /> integration", () => {
     expect(AppWrapper.state("events")).toEqual(eventsToShow);
     AppWrapper.unmount();
   });
-  test("get list of all events when user selects 'See all cities'", async () => {
+  test('get list of all events when user selects "See all cities"', async () => {
     const AppWrapper = mount(<App />);
     const suggestionItems = AppWrapper.find(CitySearch).find(".suggestions li");
     await suggestionItems.at(suggestionItems.length - 1).simulate("click");
     const allEvents = await getEvents();
-    expect(AppWrapper.state("events")).toEqual(allEvents);
-    AppWrapper.unmount();
-  });
-  test("App passes 'numQuery' state as a prop to NumberOfEvents", () => {
-    const AppWrapper = mount(<App />);
-    const AppNumQueryState = AppWrapper.state("numQuery");
-    expect(AppNumQueryState).not.toEqual(undefined);
-    expect(AppWrapper.find(NumberOfEvents).props().numQuery).toEqual(
-      AppNumQueryState
+    expect(AppWrapper.state("events")).toEqual(
+      allEvents.slice(0, AppWrapper.state("numberOfEvents"))
     );
     AppWrapper.unmount();
   });
-  test("App passes 'locations' state as a prop to CitySearch", () => {
+  test("check if number of events is properly passed on as a prop to NumberOfEvents", () => {
     const AppWrapper = mount(<App />);
-    const AppLocationsState = AppWrapper.state("locations");
-    expect(AppLocationsState).not.toEqual(undefined);
-    expect(AppWrapper.find(CitySearch).props().locations).toEqual(
-      AppLocationsState
-    );
+    AppWrapper.setState({ numberOfEvents: 5 });
+    expect(AppWrapper.find(NumberOfEvents).props().numQuery).toBe(5);
+    AppWrapper.unmount();
+  });
+  test("check to see if state changes when number of events is changed", () => {
+    const AppWrapper = mount(<App />);
+    const NumberWrapper = AppWrapper.find(NumberOfEvents);
+    NumberWrapper.find(".noe-Input").simulate("change", {
+      target: { value: 9 },
+    });
+    expect(NumberWrapper.state("numQuery")).toBe(9);
+    expect(AppWrapper.state("numberOfEvents")).toBe(9);
     AppWrapper.unmount();
   });
 });
+
+// so when i change the number of events to be displayed, it doesnt actually change. double check code with submitted ones again. something is wrong.

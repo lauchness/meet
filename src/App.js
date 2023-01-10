@@ -10,14 +10,14 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numQuery: 5,
+    numberOfEvents: 5,
   };
 
   async componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        events = events.slice(0, this.state.numQuery);
+        events = events.slice(0, this.state.numberOfEvents);
         this.setState({ events, locations: extractLocations(events) });
       }
     });
@@ -28,14 +28,14 @@ class App extends Component {
   }
 
   updateEvents = (location, inputNumber) => {
-    const { numQuery, selectedLocation } = this.state;
+    const { numberOfEvents, selectedLocation } = this.state;
     if (location) {
       getEvents().then((events) => {
         const locationEvents =
           location === "all"
             ? events
             : events.filter((event) => event.location === location);
-        const currentNum = locationEvents.slice(0, numQuery);
+        const currentNum = locationEvents.slice(0, numberOfEvents);
         this.setState({
           events: currentNum,
           selectedLocation: location,
@@ -44,21 +44,21 @@ class App extends Component {
     } else {
       getEvents().then((events) => {
         const locationEvents =
-          location === "all"
+          selectedLocation === "all"
             ? events
             : events.filter((event) => event.location === selectedLocation);
-        const currentNum = locationEvents.slice(0, numQuery);
+        const currentNum = locationEvents.slice(0, inputNumber);
         this.setState({
           events: currentNum,
-          numQuery: inputNumber,
+          numberOfEvents: inputNumber,
         });
       });
     }
   };
 
-  updateNumQuery(number) {
-    this.setState({ numQuery: number });
-  }
+  // updateNumQuery(number) {
+  //   this.setState({ numQuery: number });
+  // }
 
   render() {
     return (
@@ -67,7 +67,10 @@ class App extends Component {
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <NumberOfEvents updateEvents={this.updateEvents} />
+        <NumberOfEvents
+          numQuery={this.state.numberOfEvents}
+          // updateNumQuery={(numQuery) => this.updateNumQuery(numQuery)}
+        />
         <EventList events={this.state.events} />
       </div>
     );
