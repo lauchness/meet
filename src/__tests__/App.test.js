@@ -65,26 +65,34 @@ describe("<App /> integration", () => {
     await suggestionItems.at(suggestionItems.length - 1).simulate("click");
     const allEvents = await getEvents();
     expect(AppWrapper.state("events")).toEqual(
-      allEvents.slice(0, AppWrapper.state("numberOfEvents"))
+      allEvents.slice(0, AppWrapper.state("eventCount"))
     );
     AppWrapper.unmount();
   });
   test("check if number of events is properly passed on as a prop to NumberOfEvents", () => {
     const AppWrapper = mount(<App />);
-    AppWrapper.setState({ numberOfEvents: 5 });
-    expect(AppWrapper.find(NumberOfEvents).props().numQuery).toBe(5);
+    AppWrapper.setState({ eventCount: 5 });
+    expect(AppWrapper.find(NumberOfEvents).props().eventCount).toBe(5);
     AppWrapper.unmount();
   });
-  test("check to see if state changes when number of events is changed", () => {
+  test("check to see if state changes when number of events is changed", async () => {
     const AppWrapper = mount(<App />);
     const NumberWrapper = AppWrapper.find(NumberOfEvents);
-    NumberWrapper.find(".noe-Input").simulate("change", {
-      target: { value: 9 },
-    });
-    expect(NumberWrapper.state("numQuery")).toBe(9);
-    expect(AppWrapper.state("numberOfEvents")).toBe(9);
+    const eventObject = { target: { value: 9 } };
+    NumberWrapper.find("input.noe-Input").simulate("change", eventObject);
+    await getEvents();
+
+    expect(NumberWrapper.state("eventCount")).toBe(9);
+    expect(AppWrapper.state("eventCount")).toBe(9);
+    AppWrapper.unmount();
+  });
+  test("The contenct of the event rendered matching the content of the mock API", async () => {
+    const AppWrapper = mount(<App />);
+    const NumberWrapper = AppWrapper.find(NumberOfEvents);
+    const eventObject = { target: { value: 1 } };
+    await NumberWrapper.instance().noeInput(eventObject);
+    await getEvents();
+    expect(AppWrapper.state("events")).toEqual([mockData[0]]);
     AppWrapper.unmount();
   });
 });
-
-// so when i change the number of events to be displayed, it doesnt actually change. double check code with submitted ones again. something is wrong.

@@ -2,32 +2,35 @@ import React, { Component } from "react";
 
 class NumberOfEvents extends Component {
   state = {
-    numQuery: 5,
+    eventCount: 5,
   };
 
   noeInput = (e) => {
     const inputValue = e.target.value;
     this.props.updateEvents(null, inputValue);
-    this.setState({ numQuery: inputValue });
+    this.setState({
+      eventCount: inputValue,
+    });
   };
 
-  componentDidMount() {
-    this.setState({ numQuery: this.props.numQuery || 5 });
-  }
+  // componentDidMount() {
+  //   this.setState({ eventCount: this.props.eventCount || 5 });
+  // }
 
   render() {
-    const { numQuery } = this.state;
+    const { noe } = this.state;
     return (
       <div className="numOfEvents">
         <h2>Number Of Events</h2>
         <input
           type="number"
           className="noe-Input"
-          value={numQuery}
+          value={noe}
+          // onChange={this.noeInput}
           onChange={(event) => {
-            this.noeInput(event.target.value);
+            this.noeInput(event);
           }}
-        />
+        ></input>
       </div>
     );
   }

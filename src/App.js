@@ -10,14 +10,15 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 5,
+    selectedLocation: "all",
+    eventCount: 5,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        events = events.slice(0, this.state.numberOfEvents);
+        events = events.slice(0, this.state.eventCount);
         this.setState({ events, locations: extractLocations(events) });
       }
     });
@@ -28,14 +29,14 @@ class App extends Component {
   }
 
   updateEvents = (location, inputNumber) => {
-    const { numberOfEvents, selectedLocation } = this.state;
+    const { eventCount, selectedLocation } = this.state;
     if (location) {
       getEvents().then((events) => {
         const locationEvents =
           location === "all"
             ? events
             : events.filter((event) => event.location === location);
-        const currentNum = locationEvents.slice(0, numberOfEvents);
+        const currentNum = locationEvents.slice(0, eventCount);
         this.setState({
           events: currentNum,
           selectedLocation: location,
@@ -50,15 +51,11 @@ class App extends Component {
         const currentNum = locationEvents.slice(0, inputNumber);
         this.setState({
           events: currentNum,
-          numberOfEvents: inputNumber,
+          eventCount: inputNumber,
         });
       });
     }
   };
-
-  // updateNumQuery(number) {
-  //   this.setState({ numQuery: number });
-  // }
 
   render() {
     return (
@@ -68,8 +65,9 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <NumberOfEvents
-          numQuery={this.state.numberOfEvents}
-          // updateNumQuery={(numQuery) => this.updateNumQuery(numQuery)}
+          updateEvents={this.updateEvents}
+          eventCount={this.state.eventCount}
+          // updateNumQuery={(eventCount) => this.updateNumQuery(eventCount)}
         />
         <EventList events={this.state.events} />
       </div>
@@ -78,7 +76,3 @@ class App extends Component {
 }
 
 export default App;
-
-// i think part of step 1 is done from what i did in the exercise, but its hard to say. keep checking back from other
-// submitted things to try and make sense of it all. maybe re-read what exactly you did with CitySearch in this exercise
-// and how things were "passed".
