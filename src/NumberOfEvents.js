@@ -13,9 +13,9 @@ class NumberOfEvents extends Component {
     });
   };
 
-  // componentDidMount() {
-  //   this.setState({ eventCount: this.props.eventCount || 5 });
-  // }
+  componentDidMount() {
+    this.setState({ eventCount: this.props.eventCount || 5 });
+  }
 
   render() {
     const { noe } = this.state;
