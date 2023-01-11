@@ -71,8 +71,8 @@ describe("<App /> integration", () => {
   });
   test("check if number of events is properly passed on as a prop to NumberOfEvents", () => {
     const AppWrapper = mount(<App />);
-    AppWrapper.setState({ eventCount: 5 });
-    expect(AppWrapper.find(NumberOfEvents).props().eventCount).toBe(5);
+    AppWrapper.setState({ eventCount: 32 });
+    expect(AppWrapper.find(NumberOfEvents).props().eventCount).toBe(32);
     AppWrapper.unmount();
   });
   test("check to see if state changes when number of events is changed", async () => {

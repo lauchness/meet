@@ -21,6 +21,6 @@ describe("<Event /> component", () => {
 
   test("noe-input is 5 (number type) by default", () => {
     expect(NumberWrapper.find("input.noe-Input").prop("type")).toBe("number");
-    expect(NumberWrapper.state("eventCount")).toBe(5);
+    expect(NumberWrapper.state("eventCount")).toBe(32);
   });
 });

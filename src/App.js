@@ -11,7 +11,7 @@ class App extends Component {
     events: [],
     locations: [],
     selectedLocation: "all",
-    eventCount: 5,
+    eventCount: 32,
   };
 
   componentDidMount() {
