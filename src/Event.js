@@ -11,16 +11,20 @@ class Event extends Component {
   render() {
     const { event } = this.props;
     const { collapsed } = this.state;
+
     return (
-      <div className="Event">
-        <button className="detailsButton" onClick={this.toggleDetails}>
-          {collapsed ? "show" : "hide"}
-          Details
+      <div className="event">
+        <p className="summary">{event.summary}</p>
+        <p className="start">{new Date(event.start.dateTime).toString()}</p>
+        <p className="location">{event.location}</p>
+        <button className="details-btn" onClick={this.toggleDetails}>
+          {collapsed ? "show" : "hide"} Details
         </button>
         {!collapsed && (
-          <div clasName="details">
-            <h1 className="summary">{event.summary}</h1>
-            <p className="start">{event.start.dateTime}</p>
+          <div>
+            {/* <h1 className="summary">{event.summary}</h1>
+            <p className="start">{event.start.dateTime}</p> */}
+            <p className="description">{event.description}</p>
           </div>
         )}
       </div>
