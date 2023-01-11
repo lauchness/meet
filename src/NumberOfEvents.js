@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class NumberOfEvents extends Component {
   state = {
-    eventCount: 5,
+    eventCount: 32,
   };
 
   noeInput = (e) => {
@@ -14,7 +14,7 @@ class NumberOfEvents extends Component {
   };
 
   componentDidMount() {
-    this.setState({ eventCount: this.props.eventCount || 5 });
+    this.setState({ eventCount: this.props.eventCount || 32 });
   }
 
   render() {
