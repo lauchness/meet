@@ -22,8 +22,6 @@ class Event extends Component {
         </button>
         {!collapsed && (
           <div>
-            {/* <h1 className="summary">{event.summary}</h1>
-            <p className="start">{event.start.dateTime}</p> */}
             <p className="description">{event.description}</p>
           </div>
         )}
